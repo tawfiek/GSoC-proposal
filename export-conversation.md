@@ -40,3 +40,12 @@ And more.
 
 In this layer we will add all web and all react components needed
 
+## Implementing Exporting Functionality
+
+
+As discussed with the community [here](https://github.com/vector-im/element-web/issues/2630).
+
+The functionality should be implemented on each room individually, and also we have to add a way to limit the number of exported events, that because of the expenses of decrypting on the client side ( Resources limitations )  
+
+As mentioned in introduction this function has three phases to implement GET, FORMAT and DOWNLOAD.
+In this section I'll describe How I thought about implementing those there phases.
