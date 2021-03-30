@@ -49,3 +49,33 @@ The functionality should be implemented on each room individually, and also we h
 
 As mentioned in introduction this function has three phases to implement GET, FORMAT and DOWNLOAD.
 In this section I'll describe How I thought about implementing those there phases.
+### GET
+
+As `matrix-js-sdk` holds all communications with client server and handles all events and encryption stuff, I think it is the best place to add this phase into this SKD let it handle getting the room's events ( messages and state events ) by calling  [ GET /_matrix/client/r0/rooms/{roomId}/messages](https://matrix.org/docs/spec/client_server/latest#id267)  from the home server getting encrypted events from the server.
+> note: A private function into `MatrixClient` can be used to make this call `_createMessagesRequest`
+
+> All this logic should be added into `MatrixClient` class to be provided in the client object into `matrix-react-sdk`
+
+here is a pseudo code for how we can impalement the GET function into `MatrixClient`
+
+``` javascript
+    MatrixClient.prototype = async function  exportMessagesHistoryByRoomID (roomID, limit) {
+        // limit here should be calculated by the consumer
+        const token = eventTimeline.getPaginationToken(dir);
+        // direction here should be BACKWARDS always.
+        const dir = EventTimeline.BACKWARDS;
+
+        const response = await this._createMessagesRequest(
+            roomID,
+            token,
+            limit,
+            dir);
+
+        const encryptedEvents = await this._decryptEvents(response);
+
+        return encryptedEvents
+    }
+
+```
+Well, until this point we have all the events needed to export now lets implement `_decryptEvents` that decrypts the events.
+
