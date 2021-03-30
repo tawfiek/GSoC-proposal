@@ -59,7 +59,7 @@ As `matrix-js-sdk` holds all communications with client server and handles all e
 here is a pseudo code for how we can impalement the GET function into `MatrixClient`
 
 ``` javascript
-    MatrixClient.prototype = async function  exportMessagesHistoryByRoomID (roomID, limit) {
+    MatrixClient.prototype._exportMessagesHistoryByRoomID = async function  (roomID, limit) {
         // limit here should be calculated by the consumer
         const token = eventTimeline.getPaginationToken(dir);
         // direction here should be BACKWARDS always.
