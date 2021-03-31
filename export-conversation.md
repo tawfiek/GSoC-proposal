@@ -79,22 +79,31 @@ here is a pseudo code for how we can impalement the GET function into `MatrixCli
 ```
 Well, until this point we have all the events needed to export now lets implement `_decryptEvents()` function that decrypts the events.
 
-Here we have two types of events `stateEvents` and `matrixEvents`, we can found it into `state` and `chunk` array respectively in the API call response.
+Here we have two types of events `StateEvents` and `MatrixEvents`, we can found it into `state` and `chunk` array respectively in the API call response.
 
-we can use  `map` function ( functional programming ) to map the encrypted events arrays into decrypted ones using `getEventMapper()` function into the `Client` class, this mapper does all the decryption magic to decrypt the messages getting all cached `megolm` sessions attempt decryption and so on.
+we can use  `map` function ( functional programming ) to map the encrypted events arrays into typed objects that represent the `stateEvents` and `matrixEvents` that has all functionality of decrypting them into
 
-We can abstract our project from this stuff and just use this mapper.
+now we have ton of events that we need to decrypt them into `MatrixEvents` we have function called `attemptDecryption` this function returns a promise of decryption process maybe we can use Promise.all or some enhanced way to decrypt all events that we can decrypt it.
 
-so at the end `_decryptEventsForExport()` should be something like this
+> At this point we might fall into recourses issue because the events here must be limited to not exceed the call stack on browser.  
+
+whoever the  `_decryptEventsForExport` should be looks like this
 
 ```javascript
-MatrixClient.prototype._decryptEventsForExport = function (res) {
+MatrixClient.prototype._decryptEventsForExport = async function (res) {
     const stateEvents = res.state ?  utils.map(res.state, self.getEventMapper():{};
     const matrixEvents = utils.map(res.chunk, self.getEventMapper());
 
-    return {stateEvents, matrixEvents}
+    // This function should implemented into MatrixEvent class that takes an array of events
+    // and return a promise resolves after all promises of decryption if ended  
+    const decryptedMatrixEvents = await MatrixEvent.decryptAll(matrixEvents);
+    const decryptedStateEvents = await await MatrixEvent.decryptAll(stateEvents);
+
+    return {
+        stateEvents: decryptedStateEvents,
+        matrixEvents: decryptedMatrixEvents
+    }
 }
 ```
 Okay now we've done with this phase lets go and format the data we got form this function.
 
-## FORMAT
