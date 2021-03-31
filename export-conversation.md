@@ -83,7 +83,22 @@ Here we have two types of events `StateEvents` and `MatrixEvents`, we can found 
 
 we can use  `map` function ( functional programming ) to map the encrypted events arrays into typed objects that represent the `stateEvents` and `matrixEvents` that has all functionality of decrypting them into
 
-now we have ton of events that we need to decrypt them into `MatrixEvents` we have function called `attemptDecryption` this function returns a promise of decryption process maybe we can use Promise.all or some enhanced way to decrypt all events that we can decrypt it.
+now we have ton of events that we need to be decrypted.
+
+ into `MatrixEvents` we have function called `attemptDecryption` that called into the mapper mentioned above and this function sets `_decryptionPromise` private property into the event object, this function also waiting util the promise fulfield and set another private property called `_clearEvent` looks like this
+
+``` javascript
+{
+    _clearEvent:
+    content:
+    body: "Hello their"
+    msgtype: "m.text"
+}
+```
+
+yes this what we waiting for.
+
+we need to make some function into `MatrixEvent` that keeps tracking an array  of events to be decrypted and return all decrypted messages.
 
 > At this point we might fall into recourses issue because the events here must be limited to not exceed the call stack on browser.  
 
