@@ -125,6 +125,16 @@ Now as a result we have all events we need decrypted, actually not all of them.
 
 Some events might be not decrypted because of losing megolm sessions needed to decyrpt it in this case we might can use key backup, or request keys from your other devices, after that if we still don't have the keys, then we give up and say we just can't decrypt it.
 
-Okay now we've done with this phase lets go and format the data we got form this function.
+Okay, now we've done with this phase lets go and format the data we got form this function.
 
-## FORMAT
+### FORMAT
+
+Formatting the returned event should be very simple task, get the desired format from the user , map on the array and write your file as simple as that.
+
+Matrix has a lot of event types and all types are manged into `matrix-react-sdk` in function called `textForEvent` in `TextForEvent.js` file.
+
+this function takes the matrix event object and identify its type then returns translated string that describe the event, "Magic".
+
+now we can format the events easily into any desired format.
+
+
