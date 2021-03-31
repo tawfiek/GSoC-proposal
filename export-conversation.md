@@ -120,5 +120,11 @@ MatrixClient.prototype._decryptEventsForExport = async function (res) {
     }
 }
 ```
+
+Now as a result we have all events we need decrypted, actually not all of them.
+
+Some events might be not decrypted because of losing megolm sessions needed to decyrpt it in this case we might can use key backup, or request keys from your other devices, after that if we still don't have the keys, then we give up and say we just can't decrypt it.
+
 Okay now we've done with this phase lets go and format the data we got form this function.
 
+## FORMAT
