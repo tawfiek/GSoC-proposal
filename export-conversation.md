@@ -89,10 +89,11 @@ now we have ton of events that we need to be decrypted.
 
 ``` javascript
 {
-    _clearEvent:
-    content:
-    body: "Hello their"
-    msgtype: "m.text"
+    _clearEvent: {
+        content:
+        body: "Hello their"
+        msgtype: "m.text"
+    }
 }
 ```
 
