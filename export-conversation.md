@@ -175,4 +175,22 @@ Supported Browsers
 
 > This lib is just a recommendation since I had interacted with it before, we can use any other alternative, or sure we can implement our own file saver if we don't have one already in the codebase.
 
+# Commitment
+
+I plan to work with matrix to solve the above problem from 4 - 6 hours a day expect my exam period.
+
+My exams will take place from 3rd of July until 17th of July, so I won’t be able to work with my full capacity for about 14 days, but I will be there for few hours in the day.
+# Schedule
+
+Estimated Duration | Estimated Start/End Time     | Task
+-------------------| ---------------------------- | -------------------------------------
+1 Month            | April 13, 2021 - May 16, 2021| Continue practicing in matrix in some related area to the project, and communicate with community and mentors to discuss the project
+4 weeks            | May 17, 2021 - June 7, 2021  | Community Bonding. in this period should discuss the implementation with the community into the communication channels and the related issue on github for better understanding the limitations and all corner cases should be handled in this feature.
+6 weeks            | July 16, 2021 - August 16, 2021 | Working on the GET phase explained above and add all test cases on `matrix-js-sdk`. after this period a fully working API should be implemented and tested to get a decyrpted events from the server and get ready for the next phase
+1 week             | August 16 - 23, 2021         | First Evaluations.
+1 month            | July 16, 2021 - August 16, 2021 | In this period all UI works in `matrix-react-sdk` should be implemented and tested along as with the reaming two phases FORMAT AND DOWNLOAD and submit the final result to get a feed back from the community about the end result of this feature.
+2 weeks            | August 16 - 30, 2021        | All codes should be submitted and discuss any issues with the community
+Ongoing             | -- | Making time to support  this feature and enhance it over time to fits our community needs.
+
+
 
