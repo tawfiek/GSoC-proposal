@@ -1,4 +1,4 @@
-## Personal Information
+# Personal Information
 
 **Name:** Tawfiek allah Khalaf Eldeep
 
@@ -6,5 +6,7 @@
 
 **E-mail:** tawfiek.108@gmail.com
 
-**LinkedIn:**  [tawfiek](https://www.linkedin.com/in/tawfiek/)
+**LinkedIn:**  [in/tawfiek](https://www.linkedin.com/in/tawfiek/)
+
+**Twitter:**  [@tawfiekallah](https://twitter.com/tawfiekallah)
 
