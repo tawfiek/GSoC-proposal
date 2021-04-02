@@ -134,8 +134,45 @@ Formatting the returned event should be very simple task, get the desired format
 
 Matrix has a lot of event types and all types are manged into `matrix-react-sdk` in function called `textForEvent` in `TextForEvent.js` file.
 
-this function takes the matrix event object and identify its type then returns translated string that describe the event, "Magic".
+This function takes the matrix event object and identify its type then returns translated string that describe the event, "Magic".
 
 now we can format the events easily into any desired format.
+
+
+### DOWNLOAD
+To save a file we can use Browser API Blob to write the new file using the data above, then we can use library like [file saver](https://github.com/eligrey/FileSaver.js) to download, this library is provide us a nice to use mthod to download the file easily
+
+``` javascript
+    const content = "What's up , hello world";
+    // any kind of extension (.txt,.cpp,.cs,.bat)
+    const filename = "hello.txt";
+
+    const blob = new Blob([content], {
+        type: "text/plain;charset=utf-8"
+    });
+
+    saveAs(blob, filename);
+```
+
+But it comes with a little support limitations that we have to handle
+
+Supported Browsers
+------------------
+
+| Browser        | Constructs as | Filenames    | Max Blob Size | Dependencies |
+| -------------- | ------------- | ------------ | ------------- | ------------ |
+| Firefox 20+    | Blob          | Yes          | 800 MiB       | None         |
+| Firefox < 20   | data: URI     | No           | n/a           | [Blob.js](https://github.com/eligrey/Blob.js) |
+| Chrome         | Blob          | Yes          | [2GB][3]      | None         |
+| Chrome for Android | Blob      | Yes          | [RAM/5][3]    | None         |
+| Edge           | Blob          | Yes          | ?             | None         |
+| IE 10+         | Blob          | Yes          | 600 MiB       | None         |
+| Opera 15+      | Blob          | Yes          | 500 MiB       | None         |
+| Opera < 15     | data: URI     | No           | n/a           | [Blob.js](https://github.com/eligrey/Blob.js) |
+| Safari 6.1+*   | Blob          | No           | ?             | None         |
+| Safari < 6     | data: URI     | No           | n/a           | [Blob.js](https://github.com/eligrey/Blob.js) |
+| Safari 10.1+   | Blob          | Yes          | n/a           | None         |
+
+> This lib is just a recommendation since I had interacted with it before, we can use any other alternative, or sure we can implement our own file saver if we don't have one already in the codebase.
 
 
