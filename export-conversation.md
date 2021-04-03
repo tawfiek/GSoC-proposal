@@ -136,11 +136,27 @@ Matrix has a lot of event types and all types are manged into `matrix-react-sdk`
 
 This function takes the matrix event object and identify its type then returns translated string that describe the event, "Magic".
 
-now we can format the events easily into any desired format.
+Now we should make a function that write the Blob into text format, pass the Blob to the download function
 
+```javascript
+
+    // Format function should be called with events to format and the desired format
+    // For the GSoC project we gonna implement just the text format.
+    // And extends the feature over time to support more formats.
+
+    function formatExportedEve (events: MatrixEvent, format: String ): Blob {
+        if (format === 'text') {
+            const textContent = events.map(textForEvent);
+
+            return new Blob(textContent, {
+                type: "text/plain;charset=utf-8"
+            });
+        } // .. all formats should be implemented in the future
+    }
+```
 
 ### DOWNLOAD
-To save a file we can use Browser API Blob to write the new file using the data above, then we can use library like [file saver](https://github.com/eligrey/FileSaver.js) to download, this library is provide us a nice to use mthod to download the file easily
+In this phase all data should be arrived to the very starting point in the component, then we can use library like [file saver](https://github.com/eligrey/FileSaver.js) to download, this library is provide us a nice to use mthod to download the file easily
 
 ``` javascript
     const content = "What's up , hello world";
@@ -186,11 +202,10 @@ Estimated Duration | Estimated Start/End Time     | Task
 -------------------| ---------------------------- | -------------------------------------
 1 Month            | April 13, 2021 - May 16, 2021| Continue practicing in matrix in some related area to the project, and communicate with community and mentors to discuss the project
 4 weeks            | May 17, 2021 - June 7, 2021  | Community Bonding. in this period should discuss the implementation with the community into the communication channels and the related issue on github for better understanding the limitations and all corner cases should be handled in this feature.
-6 weeks            | July 16, 2021 - August 16, 2021 | Working on the GET phase explained above and add all test cases on `matrix-js-sdk`. after this period a fully working API should be implemented and tested to get a decyrpted events from the server and get ready for the next phase
+6 weeks            | July 16, 2021 - August 16, 2021 | Working on the GET phase explained above and add all test cases on `matrix-js-sdk`. after this period a fully working API should be implemented and tested to get decrypted events from the server and get ready for the next phase. ( The GET phase is most critical phase in this feature since it has all our concerns, thats why I give it this much time to carefully test all use cases ). At the end of this period I am planing to start with the UI components should be implemented into `matrix-react-sdk`, that will be the starting point for us to start impalement the remaining two phases in the next coding period.
 1 week             | August 16 - 23, 2021         | First Evaluations.
-1 month            | July 16, 2021 - August 16, 2021 | In this period all UI works in `matrix-react-sdk` should be implemented and tested along as with the reaming two phases FORMAT AND DOWNLOAD and submit the final result to get a feed back from the community about the end result of this feature.
+1 month            | July 16, 2021 - August 16, 2021 | Starting with the UI component implemented in the last period, we should impalement the UX and starting adding the logic of other two phases FORMAT and DOWNLOAD and making the wrapper function that will organize the data flow in the app until the download will start. 
 2 weeks            | August 16 - 30, 2021        | All codes should be submitted and discuss any issues with the community
-Ongoing             | -- | Making time to support  this feature and enhance it over time to fits our community needs.
+Ongoing             | -- | Support this feature and enhance it over time to fits our community needs, Extends the number of formats should be available to export conversion.
 
-
-
+<!-- TODO: Adding the second period task after explain the last two phases  -->
