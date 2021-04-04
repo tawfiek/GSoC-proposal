@@ -47,7 +47,7 @@ In this layer we will add all web and all react components needed
 As discussed with the community [here](https://github.com/vector-im/element-web/issues/2630).
 The functionality should be implemented on each room individually, and also we have to add a way to limit the number of exported events, that because of the expenses of decrypting on the client side ( Resources limitations )  
 
-As mentioned in introduction this function has three phases to implement GET, FORMAT and DOWNLOAD.
+As mentioned in introduction this function has three phases to implement GET, FORMAT and DOWNLOAD.  
 In this section I'll describe How I thought about implementing those there phases.
 ### GET
 
@@ -202,7 +202,7 @@ Estimated Duration | Estimated Start/End Time     | Task
 -------------------| ---------------------------- | -------------------------------------
 1 Month            | April 13, 2021 - May 16, 2021| Continue practicing in matrix in some related area to the project, and communicate with community and mentors to discuss the project
 4 weeks            | May 17, 2021 - June 7, 2021  | Community Bonding. in this period should discuss the implementation with the community into the communication channels and the related issue on github for better understanding the limitations and all corner cases should be handled in this feature.
-6 weeks            | July 16, 2021 - August 16, 2021 | Working on the GET phase explained above and add all test cases on `matrix-js-sdk`. after this period a fully working API should be implemented and tested to get decrypted events from the server and get ready for the next phase. ( The GET phase is most critical phase in this feature since it has all our concerns, thats why I give it this much time to carefully test all use cases ). At the end of this period I am planing to start with the UI components should be implemented into `matrix-react-sdk`, that will be the starting point for us to start impalement the remaining two phases in the next coding period.
+6 weeks            | July 16, 2021 - August 16, 2021 | Working on the GET phase explained above and add all test cases on `matrix-js-sdk`.  <br /> after this period a fully working API should be implemented and tested to get decrypted events from the server and get ready for the next phase. ( The GET phase is most critical phase in this feature since it has all our concerns, thats why I give it this much time to carefully test all use cases ). <br /> At the end of this period I am planing to start with the UI components should be implemented into `matrix-react-sdk`,<br /> that will be the starting point for us to start impalement the remaining two phases in the next coding period.
 1 week             | August 16 - 23, 2021         | First Evaluations.
 1 month            | July 16, 2021 - August 16, 2021 | Starting with the UI component implemented in the last period, we should impalement the UX and starting adding the logic of other two phases FORMAT and DOWNLOAD and making the wrapper function that will organize the data flow in the app until the download will start.
 2 weeks            | August 16 - 30, 2021        | All codes should be submitted and discuss any issues with the community
