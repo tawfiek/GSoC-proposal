@@ -91,3 +91,12 @@ This class extends `EventEmitter` class and add some functionality to keep track
 Hydrogen also has a main class called `TemplateView` that has all functionality needed to mount and umount view, It also uses  `TemplateViewBuilder` to build the desired components out of `render()` functions object using XHTML namespace.
 ## Login in Hydrogen
 
+In `src/platform/web/ui/login` we have all views related to the login view.<br>
+`LoginView` is the main view that represent the basic email-password inputs and the home server url input that make the user able to sign into the app.
+
+![Image 2](./assets/signIn-page.png)
+
+Login view are rendered into `RootView`, well in the `LoginView` we just start login through the `LoginViewModel` through `SessionContainer` which is the Model that will handles all our session data, pressing login button will call `login()` method passing user inputs username, password and homeServer URL which is setting up the `SessionLoadViewModel` and tracking it then  call the `startWithLogin()` method from a new object of the `SessionContainer`, then the session container start a password login by making a new object from `HomeServerAPI` and call password login method. Hmm , lets simplify it with diagram.
+
+![Image 3](./assets/login-process.png)
+
