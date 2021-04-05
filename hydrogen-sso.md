@@ -69,4 +69,25 @@ Well, lets have a deeper dive into `Hydrogen` trying to figure out how we can im
 
 ## Hydrogen Architecture
 
-Hydrogen follow MVVM Design patterns
+Hydrogen follow MVVM Design patterns.
+
+![Image 1](./assets/MVVM_Diagram.png)
+
+MVVM is stands for Model View View-Model.
+
+`Model`: here is usually class that holds the application data and business logic . <br>
+`ViewModel`: is abstraction of the view exposing public properties, it managing the binding data  between Model and View <br>
+`View`: The view is the user interface that mange the view components animations changing state and so on.
+
+In hydrogen all ModelViews are collected into `src/domain` directory, we will interact with some ModelView in this project like `LoginViewModel` and `SessionViewModel`. <br>
+All ViewModels in Hydrogen are a classes that extends `ViewModel` class, This class describes the basic functionality that ModelView should provide in every `ViewModel` to be functional as expected in all ViewModels.
+
+### `ViewModel` class
+
+This class extends `EventEmitter` class and add some functionality to keep track of disposables to manage state, handling the internationalization (i18n), and also provide View and Model some usable information about platform ..etc.
+
+### `TemplateView` class
+
+Hydrogen also has a main class called `TemplateView` that has all functionality needed to mount and umount view, It also uses  `TemplateViewBuilder` to build the desired components out of `render()` functions object using XHTML namespace.
+## Login in Hydrogen
+
