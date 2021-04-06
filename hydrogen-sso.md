@@ -7,6 +7,17 @@ Hydrogen is a Matrix chat client, built to provide seamless mobile first experie
 Single Sign-ON (SSO) is one of the most important authentication scheme in the industry, since it becomes with a great improvement of user experience in apps.
 
 Matrix provides bunch of choses to authenticate users using SSO, that has been also implemented into all other matrix chat clients, so it a key feature to be implemented into hydrogen as well.
+## Login in Hydrogen
+
+In `src/platform/web/ui/login` we have all views related to the login view.<br>
+`LoginView` is the main view that represent the basic email-password inputs and the home server url input that make the user able to sign into the app.
+
+![Image 2](./assets/signIn-page.png)
+
+Login view are rendered into `RootView`, well in the `LoginView` we just start login through the `LoginViewModel` through `SessionContainer` which is the Model that will handles all our session data, pressing login button will call `login()` method passing user inputs username, password and homeServer URL which is setting up the `SessionLoadViewModel` and tracking it then  call the `startWithLogin()` method from a new object of the `SessionContainer`, then the session container start a password login by making a new object from `HomeServerAPI` and call password login method. Hmm , lets simplify it with diagram.
+
+![Image 3](./assets/login-process.png)
+
 
 ## Login Flows in Matrix
 
@@ -63,40 +74,8 @@ the return of the login flows API call should be something like that
 ]
 ```
 
-As we can see here, the return of `loginFlow` End point based on what the `homeServer` supports. <br> So here returns with it's data that needed to adjust the UI for the user and to use it into SSO flow as well.
+As we can see here, the return of `loginFlow` End point based on what the `homeServer` supports.
 
 Well, lets have a deeper dive into `Hydrogen` trying to figure out how we can impalement this feature.
 
-## Hydrogen Architecture
-
-Hydrogen follow MVVM Design patterns.
-
-![Image 1](./assets/MVVM_Diagram.png)
-
-MVVM is stands for Model View View-Model.
-
-`Model`: here is usually class that holds the application data and business logic . <br>
-`ViewModel`: is abstraction of the view exposing public properties, it managing the binding data  between Model and View <br>
-`View`: The view is the user interface that mange the view components animations changing state and so on.
-
-In hydrogen all ModelViews are collected into `src/domain` directory, we will interact with some ModelView in this project like `LoginViewModel` and `SessionViewModel`. <br>
-All ViewModels in Hydrogen are a classes that extends `ViewModel` class, This class describes the basic functionality that ModelView should provide in every `ViewModel` to be functional as expected in all ViewModels.
-
-### `ViewModel` class
-
-This class extends `EventEmitter` class and add some functionality to keep track of disposables to manage state, handling the internationalization (i18n), and also provide View and Model some usable information about platform ..etc.
-
-### `TemplateView` class
-
-Hydrogen also has a main class called `TemplateView` that has all functionality needed to mount and umount view, It also uses  `TemplateViewBuilder` to build the desired components out of `render()` functions object using XHTML namespace.
-## Login in Hydrogen
-
-In `src/platform/web/ui/login` we have all views related to the login view.<br>
-`LoginView` is the main view that represent the basic email-password inputs and the home server url input that make the user able to sign into the app.
-
-![Image 2](./assets/signIn-page.png)
-
-Login view are rendered into `RootView`, well in the `LoginView` we just start login through the `LoginViewModel` through `SessionContainer` which is the Model that will handles all our session data, pressing login button will call `login()` method passing user inputs username, password and homeServer URL which is setting up the `SessionLoadViewModel` and tracking it then  call the `startWithLogin()` method from a new object of the `SessionContainer`, then the session container start a password login by making a new object from `HomeServerAPI` and call password login method. Hmm , lets simplify it with diagram.
-
-![Image 3](./assets/login-process.png)
-
+## Implementation
