@@ -82,6 +82,8 @@ Well, lets have a deeper dive into `Hydrogen` trying to figure out how we can im
 
 >NOTE: All codes in this document is just my thoughts about the implementation, The purpose of writing this code is rounding out the idea and simplifying it for the reader, and it is not considered as a production ready code.
 
+### Adding login flows call into `HomeServer` class
+
 To add SSO in Hydrogen, first we need call the login flow end point, adjust the view, then make the SSO authentication process.
 
 So, to call the end point the home server URL should be provided first, to do that we need to add this new API call into our `HomeServer` service  to be something like that.
@@ -95,6 +97,31 @@ Now the `HomeServer` class has the functionality to do the HTTP call to get the 
 
 We need to call this method in a proper context to loginFlow which we can move forward.
 
+### Session Container
+In session container we should add the `requestSupportedLoginFlows` method which is making a new object of `HomeServer` and call the new  method we added above to make the call then set the status of the container
+
+```javascript
+  async requestSupportedLoginFlows(homeServer) {
+    try {
+        const request = this._platform.request;
+        const clock = this._platform.clock;
+        const hsApi = new HomeServerApi({
+            homeServer,
+            request,
+            createTimeout: clock.createTimeout,
+        });
+        this._supportedLoginFlows =  await hsApi.getSupportedLoginMethods().response();
+        this._status.set(LoadStatus.LoginFlowsLoaded.find());
+    } catch (err) {
+        this._error = new Error('This home serve URL is not valid');
+        console.error(err);
+        this._status.set(LoadStatus.Error);
+    }
+  }
+```
+
+### `LoginView`
+
 In the Login view currently we just support the password login flow, we need to adjust this view to wait for the login flows call to be fulfilled and then map another two new views ( or more in the future ) specific for every flow.
 
 So again, we need to split the login view into two views one for password login flow lets call it `PasswordView` and the other for sso login flow `SSOLoginFlow`.
@@ -107,3 +134,58 @@ And after loading the flows and map the new views it should be something like
 
 ![Image 3](./assets/login-view-2.png)
 
+The request fo the login flow should be done from the `LoginModelView` which it handles our domain and logic, in `LoginModelView` we should make an event handler that handles the change in homeserver input change event, by loading the login views, it should be something like that
+
+``` javascript
+  _requestLoginFlows (homeServer) {
+    //  Here we make new object of the Loading flow view model
+    // This View should make a new loader spinner to indicates the login flow is loading
+    // This view creates new session container load the login flow through it ,
+    //  and when it's done the ready method should be called to map the login view to add the login flows supported as shown in the above views.
+
+    this._ladLoginFlowViewModel  = this.track(new LoadLoginFlowViewModel({
+        createAndStartSessionContainer: () => {
+            this._sessionContainer = this._createSessionContainer();
+            this._sessionContainer.requestSupportedLoginFlows(homeServer);
+            return this._sessionContainer;
+        },
+        ready: sessionContainer => {
+            this._sessionContainer = null;
+            this._supportedLoginFlows = _supportedLoginFlows
+        },
+        homeServer,
+    }));
+
+    this._loadLoginFlowViewModel.start();
+    this.emitChange('loadLoginFlowViewModel');
+  }
+```
+The ready method here should be called by the `LoadLoginFlowViewModel` to set the incoming supported login flows.
+
+In the login view the new views should be mapped using mapView method in the template.
+
+For SSO login flow view for example:
+
+```javascript
+  t.mapView(
+    (vm) => vm.loadLoginFlowViewModel,
+    (loadLoginFlowViewModel) =>
+        loadLoginFlowViewModel
+            ? getSSOViewIfSupported()
+            : null
+  ),
+
+
+  function getSSOViewIfSupported () {
+    if (vm.supportedLoginFlows.find(f => f.type === 'm.login.sso' )) {
+      return new SSOLoginViewModel ()
+    } else {
+      return;
+    }
+  }
+
+```
+
+and so on for all login flows.
+
+ 
