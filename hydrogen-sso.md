@@ -220,3 +220,15 @@ and in the model-view we can call all session stuff above, we can use `SessionLo
 
 
 
+
+# Schedule
+
+Estimated Duration | Estimated Start/End Time     | Task
+-------------------| ---------------------------- | -------------------------------------
+1 Month            | April 13, 2021 - May 16, 2021| Continue practicing in matrix in some related area to the project, and communicate with community and mentors to discuss the project
+4 weeks            | May 17, 2021 - June 7, 2021  | Community Bonding. in this period should discuss the implementation with the community into the communication channels and the related issue on github for better understanding the limitations and all corner cases should be handled in this feature.
+6 weeks            | July 16, 2021 - August 16, 2021 | Impalement all UIs, making the login flows call and caching and start the SSO call. (Test all functionality until it's making the SSO call to the home server)
+1 week             | August 16 - 23, 2021         | First Evaluations.
+1 month            | July 16, 2021 - August 16, 2021 | Handle all redirect stuff, adding the new views and test all the end product to deliver a fully functional SSO .
+2 weeks            | August 16 - 30, 2021        | All codes should be submitted and discuss any issues with the community
+Ongoing             | -- | Support this feature and enhance it over time to fits our community needs, Extends the number of formats should be available to export conversion.
