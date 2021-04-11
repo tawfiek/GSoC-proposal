@@ -202,20 +202,21 @@ In session container a function should be built to handel calling the SSO.
 After calling this API home server will take care of authentication process then it will redirect to our app with the URL provided to it, `<app url>/?loginToken=<some login token>` <br>
 In this case the user is successfully authenticated and we need to start a token based authentication from this point, using the token provided by the home server in `loginToke` query param.
 
-After user redirected again to our login view we should parse the `loginToken` if it's provided, make a new sission ID and set the session data int the storage.
-as it is in the `startWithLogin` function
+Now we need to modify `startWithLogin` method to conditionally start a password login or token login and inject the `loginToken` into it,
+and in the home server we should add a new method also to make the call to login using the token provided by calling the `/login` end point with the flowing payload.
 
-``` javascript
-const sessionId = this.createNewSessionId();
-sessionInfo = {
-    id: sessionId,
-    deviceId: loginData.device_id,
-    userId: loginData.user_id,
-    homeServer: homeServer,
-    accessToken: loginData.access_token,
-    lastUsed: clock.now()
-};
-log.set("id", sessionId);
-await this._platform.sessionInfoStorage.add(sessionInfo);
+``` JSON
+{
+  "type": "m.login.token",
+  "token": "<token>",
+  "txn_id": "<client generated nonce>",
+  "session": "<session ID>"
+}
 ```
+
+A new view should handle the redirected path, we can call it `CompleteSSOLoginView` for example.
+and in the model-view we can call all session stuff above, we can use `SessionLoadView` into it to make meaningful loading spinier and label.
+
+
+
 
