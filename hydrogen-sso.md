@@ -186,6 +186,36 @@ For SSO login flow view for example:
 
 ```
 
-and so on for all login flows.
+And so on for all login flows.
 
- 
+### SSO Flow Implementation
+
+When user press any buttons in the SSO view we should start the SSO authentication with the `homeServer` through `/_matrix/client/r0/login/sso/redirect` end point. This end point takes the a query parameter called `redirectUrl` which a string of the app URL.
+
+Before calling the SSO end point we should store the home server URL to be returned after the authentication done into the `homeServer`
+
+``` javascript
+    platform.settingsStorage.setString("sso_homeserver", loginOptions.homeserver);
+```
+In session container a function should be built to handel calling the SSO.
+
+After calling this API home server will take care of authentication process then it will redirect to our app with the URL provided to it, `<app url>/?loginToken=<some login token>` <br>
+In this case the user is successfully authenticated and we need to start a token based authentication from this point, using the token provided by the home server in `loginToke` query param.
+
+After user redirected again to our login view we should parse the `loginToken` if it's provided, make a new sission ID and set the session data int the storage.
+as it is in the `startWithLogin` function
+
+``` javascript
+const sessionId = this.createNewSessionId();
+sessionInfo = {
+    id: sessionId,
+    deviceId: loginData.device_id,
+    userId: loginData.user_id,
+    homeServer: homeServer,
+    accessToken: loginData.access_token,
+    lastUsed: clock.now()
+};
+log.set("id", sessionId);
+await this._platform.sessionInfoStorage.add(sessionInfo);
+```
+
