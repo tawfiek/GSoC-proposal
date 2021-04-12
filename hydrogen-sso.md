@@ -91,24 +91,7 @@ the return of the login flows API call should be something like that
         "icon": "mxc://matrix.org/ZlnaaZNPxtUuQemvgQzlOlkz",
         "brand": "google"
       },
-      {
-        "id": "oidc-gitlab",
-        "name": "GitLab",
-        "icon": "mxc://matrix.org/MCVOEmFgVieKFshPxmnejWOq",
-        "brand": "gitlab"
-      },
-      {
-        "id": "oidc-facebook",
-        "name": "Facebook",
-        "icon": "mxc://matrix.org/nsyeLIgzxazZmJadflMAsAWG",
-        "brand": "facebook"
-      },
-      {
-        "id": "oidc-apple",
-        "name": "Apple",
-        "icon": "mxc://matrix.org/QQKNSOdLiMHtJhzeAObmkFiU",
-        "brand": "apple"
-      }
+
     ],
   },
   {
@@ -151,21 +134,19 @@ In session container we should add the `requestSupportedLoginFlows` method which
 
 ```javascript
   async requestSupportedLoginFlows(homeServer) {
-    try {
-        const request = this._platform.request;
-        const clock = this._platform.clock;
-        const hsApi = new HomeServerApi({
-            homeServer,
-            request,
-            createTimeout: clock.createTimeout,
-        });
-        this._supportedLoginFlows =  await hsApi.getSupportedLoginMethods().response();
-        this._status.set(LoadStatus.LoginFlowsLoaded.find());
-    } catch (err) {
-        this._error = new Error('This home serve URL is not valid');
-        console.error(err);
-        this._status.set(LoadStatus.Error);
-    }
+    ...
+
+    const hsApi = new HomeServerApi({
+        homeServer,
+        request,
+        createTimeout: clock.createTimeout,
+    });
+    this._supportedLoginFlows =  
+      await hsApi.getSupportedLoginMethods().response();
+    this._status.set(LoadStatus.LoginFlowsLoaded.find());
+
+    ...
+
   }
 ```
 
