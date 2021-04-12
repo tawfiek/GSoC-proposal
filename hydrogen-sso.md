@@ -218,11 +218,6 @@ A new view should handle the redirected path, we can call it `CompleteSSOLoginVi
 and in the model-view we can call all session stuff above, we can use `SessionLoadView` into it to make meaningful loading spinier and label.
 
 
-
-## Testing
-
-
-
 # Schedule
 
 Estimated Duration | Estimated Start/End Time     | Task
@@ -233,4 +228,4 @@ Estimated Duration | Estimated Start/End Time     | Task
 1 week             | August 16 - 23, 2021         | First Evaluations.
 1 month            | July 16, 2021 - August 16, 2021 | Handle all redirect stuff, adding the new views and test all the end product to deliver a fully functional SSO .
 2 weeks            | August 16 - 30, 2021        | All codes should be submitted and discuss any issues with the community
-Ongoing             | -- | Support this feature, and paying some efforts to test and document hydrogen to be more community friendly 
+Ongoing             | -- | Support this feature, and paying some efforts to test and document hydrogen to be more community friendly
