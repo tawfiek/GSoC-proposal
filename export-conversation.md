@@ -25,6 +25,11 @@ Also I am currently studying communication and electronics engineering part-time
 I consider myself as an open source lover, I believe in open source value to the development community and improving my development skills, that's why I am trying to contribute from time to time into one of projects that I use everyday in my work, one of the most contribution I am proud of that one with ionic framework [#16851](https://github.com/ionic-team/ionic-framework/pull/16851), this one I was need to implement a `text-area` in ionic alert component in one of projects I was working on, and there was no way to do that in ionic 4 ( the version I was using this time), I thought okay lets go impalement it myself in ionic , why not ?!
 
 As it is my final year in the collage, I think I'll have more time in the future to pay more attention to the Open source in general. and I think GSoC and Matrix will be a good station to help me to do that.
+## Other Commitments
+
+* 13 - 15 May  Holidays.
+
+* 3 - 17 July  Final Exams.
 
 ## My contributions with matrix
 

@@ -19,6 +19,11 @@ Software developer with 4 years of experience in the market, having good experie
 It is my first contribution with Matrix this year as a GSoC participants, currently I am working in one of fin-tech startups companies as a full stack software developer.
 
 Also I am currently studying communication and electronics engineering part-time.
+## Other Commitments
+
+* 13 - 15 May  Holidays.
+
+* 3 - 17 July  Final Exams.
 
 ## Open Source Contributions
 
